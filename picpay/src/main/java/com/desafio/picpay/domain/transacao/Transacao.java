@@ -1,4 +1,4 @@
-package com.desafio.picpay.transacao;
+package com.desafio.picpay.domain.transacao;
 
 import com.desafio.picpay.domain.usuario.Usuario;
 import jakarta.persistence.*;
