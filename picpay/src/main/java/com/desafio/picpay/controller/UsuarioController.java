@@ -6,20 +6,20 @@ import com.desafio.picpay.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/usuarios")
+@RestController
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<Usuario> criaUsuario(UsuarioDTO usuario){
+    public ResponseEntity<Usuario> criaUsuario(@RequestBody @Validated UsuarioDTO usuario){
         Usuario newUsuario = usuarioService.criaUsuario(usuario);
         return new ResponseEntity<>(newUsuario, HttpStatus.CREATED);
     }
