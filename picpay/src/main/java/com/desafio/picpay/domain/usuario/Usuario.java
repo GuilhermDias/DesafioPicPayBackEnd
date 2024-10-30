@@ -26,4 +26,14 @@ public class Usuario {
     private BigDecimal saldo;
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
+
+    public Usuario(UsuarioDTO usuario) {
+        this.nome = usuario.nome();
+        this.sobrenome = usuario.sobrenome();
+        this.documento = usuario.documento();
+        this.email = usuario.email();
+        this.senha = usuario.senha();
+        this.saldo = usuario.saldo();
+        this.tipoUsuario = usuario.tipoUsuario();
+    }
 }

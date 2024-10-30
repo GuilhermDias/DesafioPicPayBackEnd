@@ -2,11 +2,14 @@ package com.desafio.picpay.service;
 
 import com.desafio.picpay.domain.usuario.TipoUsuario;
 import com.desafio.picpay.domain.usuario.Usuario;
+import com.desafio.picpay.domain.usuario.UsuarioDTO;
 import com.desafio.picpay.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class UsuarioService {
@@ -27,4 +30,13 @@ public class UsuarioService {
         this.usuarioRepository.save(usuario);
     }
 
+    public Usuario criaUsuario(UsuarioDTO data) {
+        Usuario newUsuario = new Usuario(data);
+        this.salvaUsuario(newUsuario);
+        return newUsuario;
+    }
+
+    public List<Usuario> exibeTodosUsuario() {
+        return this.usuarioRepository.findAll();
+    }
 }
