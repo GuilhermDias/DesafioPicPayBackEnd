@@ -1,6 +1,5 @@
 package com.desafio.picpay.infra;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,13 +14,13 @@ public class ControllerExceptionHandler {
         return ResponseEntity.badRequest().body(exceptionDTO);
     }
 
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity documentoDuplicadoEntry(EntityNotFoundException exception){
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity trata404(Exception exception){
         return ResponseEntity.notFound().build();
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity documentoDuplicadoEntry(Exception exception){
+    public ResponseEntity TrataExceptionGeral(Exception exception){
         ExceptionDTO exceptionDTO = new ExceptionDTO(exception.getMessage(), "500");
         return ResponseEntity.internalServerError().body(exceptionDTO);
     }
