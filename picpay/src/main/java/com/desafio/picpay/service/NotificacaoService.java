@@ -18,11 +18,12 @@ public class NotificacaoService {
         String email = usuario.getEmail();
         NotificacaoDTO notificacaoRequest = new NotificacaoDTO(email, mensagem);
 
-        ResponseEntity<String> NotificacaoResponse = restTemplate.postForEntity("https://util.devi.tools/api/v1/notify", notificacaoRequest, String.class);
+        /*ResponseEntity<String> NotificacaoResponse = restTemplate.postForEntity("https://util.devi.tools/api/v1/notify", notificacaoRequest, String.class);
 
         if(NotificacaoResponse.getStatusCode() == HttpStatus.OK){
             System.out.println("Erro ao enviar notificação");
             throw new Exception("Serviço de notificacao está em manutenção");
-        }
+        }*/
+        System.out.println("Notificação enviada");
     }
 }

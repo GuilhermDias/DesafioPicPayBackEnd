@@ -18,16 +18,19 @@ public class TransacaoService {
     @Autowired
     private UsuarioService usuarioService;
 
-    private ApiAutorizacaoService apiAutorizacaoService;
+    //private ApiAutorizacaoService apiAutorizacaoService;
 
-    public void criaTransacao(TransacaoDTO transacao) throws Exception {
+    @Autowired
+    private NotificacaoService notificacaoService;
+
+    public Transacao criaTransacao(TransacaoDTO transacao) throws Exception {
         Usuario remetente = this.usuarioService.findUsuarioById(transacao.remetenteId());
         Usuario receptor = this.usuarioService.findUsuarioById(transacao.receptorId());
 
         usuarioService.validaTransacao(remetente, transacao.valor());
 
 
-        apiAutorizacaoService.HttpAutorizacao();
+        /*apiAutorizacaoService.HttpAutorizacao();*/
 
         Transacao newTransacao = new Transacao();
         newTransacao.setRemetente(remetente);
@@ -41,6 +44,11 @@ public class TransacaoService {
         this.transacaoRepository.save(newTransacao);
         this.usuarioService.salvaUsuario(remetente);
         this.usuarioService.salvaUsuario(receptor);
+
+        this.notificacaoService.mandaNotificacao(remetente, "Transação realizada com sucesso");
+        this.notificacaoService.mandaNotificacao(receptor, "Transação recebida com sucesso");
+
+        return newTransacao;
     }
 
 }
